@@ -86,7 +86,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     defaults:
       run:
-        shell: bash
+        shell: powershell
     steps:
       - uses: actions/checkout@v4
 
