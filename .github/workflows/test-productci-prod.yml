@@ -79,3 +79,15 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/product-api:latest
+
+  deploy-local:
+    needs: build-and-push
+    runs-on: self-hosted
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pull latest image and redeploy
+        run: |
+          docker compose -f docker-compose-prod.yaml pull
+          docker compose -f docker-compose-prod.yaml up -d
