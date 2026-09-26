@@ -84,6 +84,9 @@ jobs:
     needs: build-and-push
     runs-on: self-hosted
     if: github.ref == 'refs/heads/main'
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v4
 
