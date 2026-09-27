@@ -80,17 +80,16 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/product-api:latest
 
-  deploy-local:
+ deploy-local:
     needs: build-and-push
     runs-on: self-hosted
     if: github.ref == 'refs/heads/main'
-    defaults:
-      run:
-        shell: powershell
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Pull latest image and redeploy
+        shell: powershell
         run: |
           docker compose -f docker-compose-prod.yaml pull
           docker compose -f docker-compose-prod.yaml up -d
