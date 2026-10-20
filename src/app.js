@@ -6,7 +6,7 @@ const productRoutes = require('./routes/product.route');
 const app = express();
 app.use(express.json());
 
-app.get('/health', (req, res) => res.status(200).json({ status: 'okay' }));
+app.get('/health', (req, res) => res.status(200).json({ status: 'ok' }));
 app.use('/api/products', productRoutes);
 
 connectDB().then(() => {
